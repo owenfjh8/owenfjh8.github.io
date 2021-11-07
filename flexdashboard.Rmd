@@ -1,0 +1,67 @@
+---
+title: "flexdashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+```
+
+
+```{r}
+data("instacart")
+```
+
+```{r}
+instacart = 
+  instacart %>% 
+  janitor::clean_names() %>% 
+  drop_na()
+```
+
+
+-----------------------------------------------------------------------
+
+### Chart A-Number of items odered in aisle
+
+```{r}
+instacart %>%
+  count(aisle) %>%
+  rename(count = n) %>%
+  filter(count > 10000) %>%
+  mutate(
+    aisle = factor(aisle),
+    aisle = forcats::fct_reorder(aisle, count)
+  ) %>%
+  plot_ly(x = ~count, y = ~aisle, type = "bar") %>% 
+  layout(yaxis = list(title = "Number of items odered in aisle"))
+```
+
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+instacart %>% 
+  sample_n(200) %>% 
+  count(department) %>% 
+  mutate(department = fct_reorder(department,n)) %>% 
+  plot_ly(x= ~department, y = ~n,color = ~ department, type = "box")
+```
+
+### Chart C
+
+```{r}
+instacart %>% 
+  sample_n(200) %>% 
+  mutate(department = fct_reorder(department,order_number)) %>% 
+  plot_ly(x= ~department,y = ~order_number,color = ~department, type = "scatter" )
+```
+

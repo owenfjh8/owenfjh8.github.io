@@ -1,0 +1,19 @@
+---
+title: "Welcome to Jiahao Fan's website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Hi, this is Jiahao Fan, a student from Department of Biostatistics at Columbia University in the City of New York.
+
+## Academic and Professional Experience
+
+[Resume](Resume.html)
+
+## flexdashboard
+
+
+[Flexdashboard](flexdashboard.html)
+
